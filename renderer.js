@@ -3,20 +3,52 @@
 // All of the Node.js APIs are available in this process.
 let angular = require('angular')
 let app = angular.module('myApp', [])
-let socket = require('socket.io-client')('http://localhost:3000/stream')
+let socket = require('socket.io-client')('http://localhost:3000')
 
 app.controller('myController', ($scope) => {
-  $scope.name = 'Ronald'
-  $scope.message = ''
-  socket.on('messages', data => $scope.$apply(() => $scope.posts = data))
-  socket.on('messages.update', data => $scope.$apply(() => $scope.posts.push(data.new_val)))
-  socket.on('message.success', () => $scope.$apply(() => $scope.message = ''))
-  $scope.sendMessage = () => {
-    socket.emit('message.send', {
-      user: $scope.name,
-      message: $scope.message
+  socket.emit('user.get', {
+    id: '67045da2-2bc7-4418-89f6-89faac425f7e'
+  })
+  socket.emit('game.latest.get')
+  socket.on('user.send', user => $scope.$apply(() => $scope.user = user))
+  socket.on('game.latest.send', game => $scope.$apply(() => {
+    $scope.game = game
+    $scope.bet.player = game.players[0]
+  }))
+  socket.on('game.latest.bets.update', data => $scope.$apply(() => $scope.game.bets = data.new_val.bets))
+  socket.on('user.update', user => $scope.$apply(() => $scope.user = user.new_val))
+  $scope.submitBet = function () {
+    socket.emit('game.latest.bet.send', {
+      gameId: $scope.game.id,
+      bet: {
+        userId: $scope.user.id,
+        player: $scope.bet.player,
+        amount: $scope.bet.amount
+      }
     })
   }
+
+  socket.on('bet.success', () => $scope.$apply(() => $scope.bet = {
+    player: $scope.game.players[0],
+    amount: 10
+  }))
+
+  $scope.bet = {
+    player: undefined,
+    amount: 10
+  }
+
+  // Examples
+  // $scope.message = ''
+  // socket.on('messages', data => $scope.$apply(() => $scope.posts = data))
+  // socket.on('messages.update', data => $scope.$apply(() => $scope.posts.push(data.new_val)))
+  // socket.on('message.success', () => $scope.$apply(() => $scope.message = ''))
+  // $scope.sendMessage = () => {
+  //   socket.emit('message.send', {
+  //     user: $scope.name,
+  //     message: $scope.message
+  //   })
+  // }
 })
 
 // How to make a factory
