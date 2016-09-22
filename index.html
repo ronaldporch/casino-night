@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title>Hello World!</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
   </head>
   <body ng-app="myApp" ng-controller="myController">
     <h1>Hello {{ user.userName }}!</h1>
@@ -13,10 +14,6 @@
       {{ game | json }}
     </pre>
     <button type="button" name="button" ng-click="submitBet()">Submit Bet</button>
-    <!-- <form ng-submit="sendMessage()">
-      <input type="text" name="name" value="" ng-model="message">
-      <button type="submit" name="button">Send Message</button>
-    </form> -->
   </body>
 
   <script>
