@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+  </head>
+  <body ng-app="myApp" ng-controller="myController">
+    <h1>Hello {{ name }}!</h1>
+    <pre>{{ posts | json }}</pre>
+    <form ng-submit="sendMessage()">
+      <input type="text" name="name" value="" ng-model="message">
+      <button type="submit" name="button">Send Message</button>
+    </form>
+  </body>
+
+  <script>
+    // You can also require other files to run in this process
+    require('./renderer.js')
+  </script>
+</html>
