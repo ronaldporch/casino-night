@@ -15,6 +15,7 @@ app.controller('myController', ($scope) => {
     $scope.game = game
     $scope.bet.player = game.players[0]
   }))
+  socket.on('game.update', data => $scope.$apply(() => $scope.game = data.new_val))
   socket.on('game.latest.bets.update', data => $scope.$apply(() => $scope.game.bets = data.new_val.bets))
   socket.on('user.update', user => $scope.$apply(() => $scope.user = user.new_val))
   $scope.submitBet = function () {
