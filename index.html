@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <title>Hello World!</title>
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+    <!-- <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.js"></script> -->
   </head>
   <body ng-app="myApp" ng-controller="myController">
-    <h1>Hello {{ user.userName }}!</h1>
-    <pre>
-      {{ user | json }}
-    </pre>
-    <pre>
-      {{ game | json }}
-    </pre>
-    <button type="button" name="button" ng-click="submitBet()">Submit Bet</button>
+    <div class="container">
+      <h1>Hello {{ user.userName }}!</h1>
+      <pre>{{ user | json }}</pre>
+      <pre>{{ game | json }}</pre>
+      <button type="button" name="button" ng-click="submitBet()">Submit Bet</button>
+    </div>
   </body>
 
   <script>
