@@ -7,7 +7,7 @@ let socket = require('socket.io-client')('http://localhost:3000')
 
 app.controller('myController', ($scope) => {
   socket.emit('user.get', {
-    id: '67045da2-2bc7-4418-89f6-89faac425f7e'
+    id: '2215155d-ee54-417c-8d2d-e8010f4e3626'
   })
   socket.emit('game.latest.get')
   socket.on('user.send', user => $scope.$apply(() => $scope.user = user))
@@ -37,18 +37,6 @@ app.controller('myController', ($scope) => {
     player: undefined,
     amount: 10
   }
-
-  // Examples
-  // $scope.message = ''
-  // socket.on('messages', data => $scope.$apply(() => $scope.posts = data))
-  // socket.on('messages.update', data => $scope.$apply(() => $scope.posts.push(data.new_val)))
-  // socket.on('message.success', () => $scope.$apply(() => $scope.message = ''))
-  // $scope.sendMessage = () => {
-  //   socket.emit('message.send', {
-  //     user: $scope.name,
-  //     message: $scope.message
-  //   })
-  // }
 })
 
 // How to make a factory
